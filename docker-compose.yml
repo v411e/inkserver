@@ -1,9 +1,9 @@
 version: "3"
 services:
   ink:
-    image: "valentinriess/ink"
-    build:
-      context: .
+    image: "valentinriess/inkserver:latest"
+    # build:
+    #   context: .
     # environment:
     #   - AUTH_SECRET=betterUseASecretInstead
     ports:

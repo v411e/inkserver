@@ -4,7 +4,8 @@ WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
 
-RUN apt install libmagickwand-dev
+RUN apt -y install libmagickwand-dev
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 COPY ./ink-server /app

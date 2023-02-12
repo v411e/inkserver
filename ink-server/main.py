@@ -52,15 +52,17 @@ async def handle_random(request: web.Request) -> web.FileResponse:
     # check if request is authenticated
     secret = ""
     try:
-        with open('/run/secrets/auth_secret', 'r') as secret_file:
-            secret = secret_file.read()
+        with open("/run/secrets/auth_secret", "r") as secret_file:
+            secret = secret_file.read().rstrip("\n")
     except FileNotFoundError as e:
-        log.warning("'auth_secret' not at /run/secrets/auth_secret. Fallback to environment variable AUTH_SECRET.")
+        log.warning(
+            "'auth_secret' not at /run/secrets/auth_secret. Fallback to environment variable AUTH_SECRET."
+        )
         if not os.getenv("AUTH_SECRET"):
             raise Exception("AUTH_SECRET not configured.")
         else:
             secret = os.getenv("AUTH_SECRET")
-    
+
     if not params["secret"] or params["secret"] != secret:
         log.info("Unauthorized request to /random")
         raise web.HTTPUnauthorized
