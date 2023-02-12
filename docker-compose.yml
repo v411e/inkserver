@@ -1,0 +1,18 @@
+version: "3"
+services:
+  ink:
+    image: "valentinriess/ink"
+    build:
+      context: .
+    # environment:
+    #   - AUTH_SECRET=betterUseASecretInstead
+    ports:
+      - 8080:8080
+    volumes:
+      - "./data:/app/data"
+    secrets:
+      - auth_secret
+
+secrets:
+  auth_secret:
+    file: ./auth_secret

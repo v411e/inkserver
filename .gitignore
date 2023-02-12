@@ -1,0 +1,6 @@
+.venv
+.vscode
+data
+__pycache__
+*.png
+auth_secret
