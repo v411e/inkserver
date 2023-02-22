@@ -69,7 +69,7 @@ class ImageProviderInterface(metaclass=abc.ABCMeta):
     def _edit_image(
         filename: str,
         width: int = 1200,
-        height: int = 800,
+        height: int = 825,
         format: str = "png",
         crop: bool = True,
         padding: int = 0,
