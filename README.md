@@ -1,7 +1,7 @@
 # Inkserver
 [<img src="https://img.shields.io/badge/dockerhub-valentinriess/inkserver-informational.svg?logo=DOCKER">](https://hub.docker.com/repository/docker/valentinriess/inkserver/tags)
 
-![P2220404](https://user-images.githubusercontent.com/8049779/220622456-6720fbd7-6f1b-4283-9ffb-b0d537ed46a7.JPG)
+![P2220407](https://user-images.githubusercontent.com/8049779/220693178-48487160-d668-4da6-931e-7ae6b3840e1c.JPG)
 
 
 This simple webserver can be used to provide adapted content for an Inkplate to fetch. It uses [ImageMagick](https://imagemagick.org/) to resize and transform the content.
