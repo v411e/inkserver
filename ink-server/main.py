@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 
 from aiohttp import web, ClientSession
 from image_provider import ImageProviderInterface, XKCDImageProvider, LocalImageProvider
@@ -24,6 +25,21 @@ async def handle_root(request: web.Request) -> web.Response:
     log.info("Request to /")
     text = f"Use /random to return a random image."
     return web.Response(text=text)
+
+
+async def handle_root_post(request: web.Request) -> web.Response:
+    """Handler for route: /
+
+    Args:
+        request (web.Request): Request
+
+    Returns:
+        web.Response: Response
+    """
+    log.info("Post-Request to /")
+    json: dict = await request.json()
+    log.info(f"Raw json: {json}")
+    return web.Response(text="Success!")
 
 
 def isAuthenticated(request: web.Request) -> bool:
@@ -192,6 +208,7 @@ async def handle_fetch_url(request: web.Request) -> web.Response:
     json: dict = await request.json()
     log.info(f"Raw json: {json}")
     img_url = json.get("url", "")
+    img_url = re.match(r'^(.*\.(jpeg|jpg|png|gif|svg|webp))', img_url, re.IGNORECASE).group()
     filename = img_url.split("/")[-1]
 
     async with ClientSession() as session:
@@ -207,6 +224,7 @@ app = web.Application()
 app.add_routes(
     [
         web.get("/", handle_root),
+        web.post("/", handle_root_post),
         web.get("/random", handle_random),
         web.get("/upload", handle_upload_form),
         web.post("/upload", handle_upload),
